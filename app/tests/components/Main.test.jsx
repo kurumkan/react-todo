@@ -9,4 +9,16 @@ describe('Main', ()=>{
 	it('should exist', () => {
 		expect(Main).toExist();
 	});
+
+
+	it('should add todo to the todos state on handleAddTodo', () => {		
+		var testText = 'test text';
+
+		var main = TestUtils.renderIntoDocument(<Main/>);
+		main.setState({todos: []});
+		main.handleAddTodo(testText);
+
+		expect(main.state.todos[0].text).toBe(testText)		
+	});
+
 })	

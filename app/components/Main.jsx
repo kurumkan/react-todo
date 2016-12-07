@@ -1,26 +1,29 @@
 var React = require("react");
+var uuid = require('node-uuid');
+
 var TodoList = require('TodoList');
 var AddTodo = require('AddTodo');
 var Search = require('Search');
+
 
 module.exports = React.createClass({
 	getInitialState: function() {
 		return {
 			todos: [
 				{
-					id: 1,
+					id: uuid(),
 					text: "Walk the dog"
 				},
 				{
-					id: 2,
+					id: uuid(),
 					text: "Clean the yard"
 				},
 				{
-					id: 3,
+					id: uuid(),
 					text: "Finish the tutorial"
 				},
 				{
-					id: 4,
+					id: uuid(),
 					text: "Apply for an internship"
 				}
 			],
@@ -30,7 +33,9 @@ module.exports = React.createClass({
 	},
 
 	handleAddTodo: function(text){
-		alert('new todo '+ text);
+		var {todos} = this.state;
+		todos.push({text: text, id: uuid()});
+		this.setState({todos: todos});
 	},
 
 	handleSearch: function(showCompleted, term){
