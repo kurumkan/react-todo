@@ -12,29 +12,37 @@ module.exports = React.createClass({
 			todos: [
 				{
 					id: uuid(),
-					text: "Walk the dog"
+					text: "Walk the dog",
+					completed: false
 				},
 				{
 					id: uuid(),
-					text: "Clean the yard"
+					text: "Clean the yard",
+					completed: false
 				},
 				{
 					id: uuid(),
-					text: "Finish the tutorial"
+					text: "Finish the tutorial",
+					completed: true				
 				},
 				{
 					id: uuid(),
-					text: "Apply for an internship"
+					text: "Apply for an internship",
+					completed: true				
 				}
 			],
 			showCompleted: false,
 			term: ''
 		}
 	},
-
+	
 	handleAddTodo: function(text){
 		var {todos} = this.state;
-		todos.push({text: text, id: uuid()});
+		todos.push({
+			text: text, 
+			id: uuid(),
+			completed: false
+		});
 		this.setState({todos: todos});
 	},
 
@@ -43,6 +51,17 @@ module.exports = React.createClass({
 			term: term.toLowerCase(),
 			showCompleted: showCompleted
 		});				
+	},
+
+	handleToggle: function(id){
+		var updatedTodos = this.state.todos.map((todo)=>{
+			if(todo.id===id)
+				todo.completed=!todo.completed;			
+			
+			return todo;
+		});
+
+		this.setState({todos: updatedTodos});
 	},
 
 	render: function(){
@@ -56,7 +75,7 @@ module.exports = React.createClass({
 					showCompleted={this.state.showCompleted} 
 					term={this.state.term} 
 				/>
-				<TodoList todos={todos}/>
+				<TodoList todos={todos} onToggle={this.handleToggle} />
 				<AddTodo onAddTodo={this.handleAddTodo} />
 			</div>	
 		);

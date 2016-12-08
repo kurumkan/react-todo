@@ -5,11 +5,16 @@ module.exports = React.createClass({
 
 	render: function(){
 
-		var {id, text} = this.props;
+		var {text, completed, id} = this.props;
 
 		return (
-			<div>									
-				{id} - {text}
+			<div onClick={
+				()=>{
+					this.props.onToggle(id);
+				}
+			} >									
+				{text} 
+				<input type='checkbox' checked={completed} />
 			</div>	
 		);
 	}
