@@ -42,13 +42,14 @@ module.exports = React.createClass({
 				todo.completed=!todo.completed;			
 			
 			return todo;
-		});
+		});		
 
 		this.setState({todos: updatedTodos});
 	},
 
 	render: function(){
-		var {todos}=this.state;
+		var {todos, term, showCompleted}=this.state;		
+		var filteredTodos = TodoAPI.filterTodos(todos, showCompleted, term);
 
 		return (
 			<div>									
@@ -58,7 +59,7 @@ module.exports = React.createClass({
 					showCompleted={this.state.showCompleted} 
 					term={this.state.term} 
 				/>
-				<TodoList todos={todos} onToggle={this.handleToggle} />
+				<TodoList todos={filteredTodos} onToggle={this.handleToggle} />
 				<AddTodo onAddTodo={this.handleAddTodo} />
 			</div>	
 		);
