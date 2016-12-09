@@ -24,7 +24,7 @@ module.exports = React.createClass({
 
   render: function(){     
     return (
-      <div>     
+      <div className='container__header'>     
         <input 
           type='search' placeholder='Search todos'
           onChange={this.handleSearch} value={this.state.term}            

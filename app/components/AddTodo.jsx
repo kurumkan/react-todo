@@ -26,7 +26,7 @@ module.exports = React.createClass({
 
 	render: function(){	
 		return (
-			<div>									
+			<div className='container__footer'>									
 				<form onSubmit={this.hanldeSubmit} >
 					<input 
 						type='text' placeholder='What do you need to do?'

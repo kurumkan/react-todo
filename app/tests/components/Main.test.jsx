@@ -47,7 +47,7 @@ describe('Main', ()=>{
 	});
 
 
-	it('should change state on handleToggle', () => {		
+	it('should set createdAt to null on handleToggle', () => {		
 		var main = TestUtils.renderIntoDocument(<Main/>);
 		main.setState({
 					todos: [

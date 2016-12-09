@@ -58,14 +58,20 @@ module.exports = React.createClass({
 
 		return (
 			<div>									
-				<h1>ToDo App</h1>		
-				<Search 
-					onSearch={this.handleSearch} 
-					showCompleted={this.state.showCompleted} 
-					term={this.state.term} 
-				/>
-				<TodoList todos={filteredTodos} onToggle={this.handleToggle} />
-				<AddTodo onAddTodo={this.handleAddTodo} />
+				<h1 className='page-title'>Todo App</h1>
+				<div className='row'>
+					<div className='column small-centered small-11 medium-6 large-5'>
+						<div className='container'>
+							<Search 
+								onSearch={this.handleSearch} 
+								showCompleted={this.state.showCompleted} 
+								term={this.state.term} 
+							/>
+							<TodoList todos={filteredTodos} onToggle={this.handleToggle} />
+							<AddTodo onAddTodo={this.handleAddTodo} />
+						</div>
+					</div>
+				</div>
 			</div>	
 		);
 	}
