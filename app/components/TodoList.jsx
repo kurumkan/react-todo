@@ -5,18 +5,20 @@ module.exports = React.createClass({
 	
 	render: function(){
 		var {todos}=this.props;
-		if(todos.length===0)
-			return <p className='container___message'>Nothing To Do</p>
-		var renderList = ()=>{
-			return todos.map((todo)=><TodoListItem {...todo} key={todo.id} onToggle={this.props.onToggle} />)
-		}
+		var renderList = () => {
 
+			if(todos.length===0)
+				return <p className='container__message'>Nothing To Do</p>			
+			else
+				return todos.map((todo)=><TodoListItem {...todo} key={todo.id} onToggle={this.props.onToggle} />);			
+					
+		}
 		return (
-			<div>									
+			<div>
 				{renderList()}
-			</div>	
-		);
-	}
+			</div>
+	    )	
+	}	
 })
 
 	
