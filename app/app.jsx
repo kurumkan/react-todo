@@ -7,15 +7,17 @@ var Main = require("Main");
 
 var actions = require('actions');
 var store = require('configureStore').configure();
-
+var TodoAPI = require('TodoAPI');
 
 store.subscribe(()=>{
-	console.log('STATE is ', store.getState())
+	var state = store.getState();
+	//console.log('STATE is ', store.getState());
+	TodoAPI.setTodos(state.todos);
 })
 
-store.dispatch(actions.addTodo('clearn the yard'));
-store.dispatch(actions.setTerm('yard'));
-store.dispatch(actions.toggleShowCompleted());
+var intialTodos = TodoAPI.getTodos();
+store.dispatch(actions.addTodos(intialTodos));
+
 
 //Load foundation
 require('style!css!foundation-sites/dist/foundation.min.css');
