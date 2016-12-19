@@ -1,38 +1,43 @@
 var React = require("react");
+var {connect} = require('react-redux');
+var actions = require('actions');
 
-module.exports = React.createClass({
+export var Search = React.createClass({
 
   getInitialState: function() {    
+    var {term, showCompleted} = this.props;
     return {
-      term: this.props.term,
-      showCompleted: this.props.showCompleted
+      term,
+      showCompleted
     }  
   },
  
-  handleSearch: function(e){  
-    var {term, showCompleted} = this.state;
-
-    if(e.target.type=='checkbox')     
-      showCompleted=!showCompleted;      
-    else
-      term = e.target.value;                 
-
-    this.setState({showCompleted: showCompleted, term: term});
-    
-    this.props.onSearch(showCompleted, term);      
-  },
-
   render: function(){     
+    var {dispatch} = this.props;
     return (
       <div className='container__header'>     
         <input 
           type='search' placeholder='Search todos'
-          onChange={this.handleSearch} value={this.state.term}            
+          value={this.state.term}
+          onChange={
+            (e)=>{
+              var {value} = e.target;
+              this.setState({term: value});  
+              dispatch(actions.setTerm(value));
+            }
+            
+          }
         />   
         <label>       
           <input 
             type="checkbox" 
-            checked={this.state.showCompleted} onChange={this.handleSearch} 
+            checked={this.state.showCompleted} 
+            onChange={(e)=>{
+              dispatch(actions.toggleShowCompleted())
+              var {showCompleted}=this.state;
+              showCompleted=!showCompleted;
+              this.setState({showCompleted})
+            }} 
           /> 
           Show completed todos
         </label>
@@ -41,5 +46,12 @@ module.exports = React.createClass({
   }
 })
 
-  
+export default connect(
+  (state)=>{
+    return {
+      showCompleted: state.showCompleted,
+      term: state.term
+    }
+  }
+)(Search);  
 
